@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/goit-react-hw-08-phonebook/static/css/main.4b1b1fca.css",
-    "main.js": "/goit-react-hw-08-phonebook/static/js/main.c5263ba7.js",
+    "main.js": "/goit-react-hw-08-phonebook/static/js/main.e243ea72.js",
     "static/js/130.91975329.chunk.js": "/goit-react-hw-08-phonebook/static/js/130.91975329.chunk.js",
-    "static/js/890.7947d797.chunk.js": "/goit-react-hw-08-phonebook/static/js/890.7947d797.chunk.js",
+    "static/js/890.ae987dfb.chunk.js": "/goit-react-hw-08-phonebook/static/js/890.ae987dfb.chunk.js",
     "static/js/11.7b33fa48.chunk.js": "/goit-react-hw-08-phonebook/static/js/11.7b33fa48.chunk.js",
     "static/js/459.56a8b49b.chunk.js": "/goit-react-hw-08-phonebook/static/js/459.56a8b49b.chunk.js",
     "static/js/103.a5632d3e.chunk.js": "/goit-react-hw-08-phonebook/static/js/103.a5632d3e.chunk.js",
@@ -14,9 +14,9 @@
     "static/media/registrationImg.png": "/goit-react-hw-08-phonebook/static/media/registrationImg.4f6f8e2bca93c983d0f4.png",
     "index.html": "/goit-react-hw-08-phonebook/index.html",
     "main.4b1b1fca.css.map": "/goit-react-hw-08-phonebook/static/css/main.4b1b1fca.css.map",
-    "main.c5263ba7.js.map": "/goit-react-hw-08-phonebook/static/js/main.c5263ba7.js.map",
+    "main.e243ea72.js.map": "/goit-react-hw-08-phonebook/static/js/main.e243ea72.js.map",
     "130.91975329.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/130.91975329.chunk.js.map",
-    "890.7947d797.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/890.7947d797.chunk.js.map",
+    "890.ae987dfb.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/890.ae987dfb.chunk.js.map",
     "11.7b33fa48.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/11.7b33fa48.chunk.js.map",
     "459.56a8b49b.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/459.56a8b49b.chunk.js.map",
     "103.a5632d3e.chunk.js.map": "/goit-react-hw-08-phonebook/static/js/103.a5632d3e.chunk.js.map",
@@ -25,6 +25,6 @@
   },
   "entrypoints": [
     "static/css/main.4b1b1fca.css",
-    "static/js/main.c5263ba7.js"
+    "static/js/main.e243ea72.js"
   ]
 }

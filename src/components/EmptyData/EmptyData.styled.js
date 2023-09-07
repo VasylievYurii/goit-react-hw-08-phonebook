@@ -30,10 +30,6 @@ export const BsPersonAddSvg = styled(BsPersonAdd)`
 `;
 
 export const SvgWrapper = styled.div`
-  /* position: fixed;
-  bottom: 4%;
-  right: 3%; */
-  /* background-color: #42e8e0; */
   border: #fff 2px solid;
   padding: 10px;
   border-radius: 50%;

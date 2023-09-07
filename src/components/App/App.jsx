@@ -1,15 +1,13 @@
-import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import { useLocation } from 'react-router-dom';
-import Layout from '../Layout/Layout';
-import { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute';
-import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
-import { AnimatePresence } from 'framer-motion';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 import { useAuth } from 'hooks/useAuth';
-import { useEffect } from 'react';
 import { refreshUser } from 'redux/auth/operations';
 import Loader from 'components/Loader/Loader';
+import { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import Layout from '../Layout/Layout';
 
 const Home = lazy(() => import('pages/Home'));
 const Contacts = lazy(() => import('pages/Contacts/Contacts'));
@@ -24,15 +22,12 @@ function App() {
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
+
   return (
-    // <AnimatePresence>
-    isRefreshing ? (
-      <AnimatePresence>
-        <b>Refreshing user...</b>{' '}
-      </AnimatePresence>
-    ) : (
-      <AnimatePresence>
-        {' '}
+    <AnimatePresence>
+      {isRefreshing ? (
+        <b>Refreshing user...</b>
+      ) : (
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -69,9 +64,9 @@ function App() {
               }
             />
           </Route>
-        </Routes>{' '}
-      </AnimatePresence>
-    )
+        </Routes>
+      )}
+    </AnimatePresence>
   );
 }
 

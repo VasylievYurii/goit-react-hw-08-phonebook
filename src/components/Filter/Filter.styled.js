@@ -25,7 +25,7 @@ export const FilterInput = styled.input`
 
 export const RiUserSearchLineSvg = styled(RiUserSearchLine)`
   position: absolute;
-  fill: var(--color-contacts);
+  fill: var(--color-main-one);
   top: 55%;
   left: 95%;
   width: 20px;

@@ -1,47 +1,78 @@
-import FormPhonebook from 'components/FormPhonebook';
-import Contact from 'components/ContactCard/ContactCard';
-import Filter from 'components/Filter';
+import { Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { useLocation } from 'react-router-dom';
+import Layout from '../Layout/Layout';
+import { RestrictedRoute } from 'components/RestrictedRoute/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
+import { AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { useAuth } from 'hooks/useAuth';
 import { useEffect } from 'react';
-import {
-  Section,
-  Container,
-  Title,
-  TitleContacts,
-  DiPhonegapSvg,
-} from './App.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getIsLoading, getError } from 'redux/selectors';
-import { fetchContacts } from 'redux/operations';
+import { refreshUser } from 'redux/auth/operations';
+import Loader from 'components/Loader/Loader';
 
-export function App() {
+const Home = lazy(() => import('pages/Home'));
+const Contacts = lazy(() => import('pages/Contacts/Contacts'));
+const Registration = lazy(() => import('pages/Registration'));
+const Login = lazy(() => import('pages/Login'));
+
+function App() {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refreshUser());
   }, [dispatch]);
-
   return (
-    <>
-      <Section>
-        <Container>
-          <Title>
-            <DiPhonegapSvg />
-            Phonebook
-          </Title>
-          <FormPhonebook />
-          {isLoading && !error && <b>Request in progress...</b>}
-          {contacts.length === 0 ? null : (
-            <>
-              <TitleContacts>Contacts</TitleContacts>
-              <Filter />
-              <Contact />
-            </>
-          )}
-        </Container>
-      </Section>
-    </>
+    // <AnimatePresence>
+    isRefreshing ? (
+      <AnimatePresence>
+        <b>Refreshing user...</b>{' '}
+      </AnimatePresence>
+    ) : (
+      <AnimatePresence>
+        {' '}
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route
+              path="contacts"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <PrivateRoute redirectTo="/login" component={<Contacts />} />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="registration"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RestrictedRoute
+                    redirectTo="/contacts"
+                    component={<Registration />}
+                  />
+                </Suspense>
+              }
+            ></Route>
+
+            <Route
+              path="login"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <RestrictedRoute
+                    redirectTo="/contacts"
+                    component={<Login />}
+                  />
+                </Suspense>
+              }
+            />
+          </Route>
+        </Routes>{' '}
+      </AnimatePresence>
+    )
   );
 }
+
+export default App;

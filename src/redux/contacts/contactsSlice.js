@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import Notiflix from 'notiflix';
 import { contactsInitialState } from './initialState';
-import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from 'redux/contacts/operations';
 
 const handlePending = state => {
   state.isLoading = true;
@@ -28,23 +31,7 @@ const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
-
-        const normalizedNameFilter = payload.name.toLowerCase();
-        const isFoundName = !state.items.find(contact =>
-          contact.name.toLowerCase().includes(normalizedNameFilter)
-        );
-        const isFoundPhone = !state.items.find(contact =>
-          contact.phone.includes(payload.phone)
-        );
-        const isFound = isFoundName && isFoundPhone;
-
-        if (isFound) {
-          state.items.unshift(payload);
-        } else {
-          Notiflix.Notify.failure(
-            `This contact is already in your contact list.`
-          );
-        }
+        state.items.unshift(payload);
       })
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)

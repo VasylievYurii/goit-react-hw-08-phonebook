@@ -1,6 +1,26 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 
+export const ContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 40px;
+  padding-right: 40px;
+  gap: 40px;
+  @media screen and (min-width: 760px) {
+    flex-direction: row;
+    padding-top: 40px;
+  }
+  @media screen and (min-width: 860px) {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+`;
+
+export const FormikWrapper = styled.div``;
+
 export const FormWrapper = styled(Form)`
   font-size: 14px;
   padding: 1em;
@@ -58,5 +78,18 @@ export const FieldForm = styled(Field)`
   padding-right: 30px;
   &:focus {
     box-shadow: 0 0 8px 0 var(--color-contacts);
+  }
+`;
+
+export const Image = styled.img`
+  width: 80%;
+  @media screen and (min-width: 460px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 860px) {
+    max-width: 500px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 600px;
   }
 `;

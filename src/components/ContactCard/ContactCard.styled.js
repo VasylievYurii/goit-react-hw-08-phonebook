@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { RiDeleteBinLine } from 'react-icons/ri';
+import { RxCrossCircled } from 'react-icons/rx';
+import { AiOutlinePhone } from 'react-icons/ai';
 
 export const ContactList = styled.li`
   display: block;
@@ -12,16 +13,17 @@ export const ContactList = styled.li`
 
 export const ContactCard = styled.a`
   position: relative;
-  display: block;
-  padding: 0.8em;
-  border-radius: 5px;
-  background-color: var(--color-contacts);
+  display: flex;
+  padding: 0.4em;
+  border-radius: 40px;
+  border-top-right-radius: 5px;
+  background-color: #3686a8;
   box-shadow: auto;
   transition: background-color 250ms var(--timing-function),
     box-shadow 250ms var(--timing-function);
 
   &:hover {
-    background-color: var(--color-main-three);
+    background-color: #35ebe4;
     box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
   }
 
@@ -37,30 +39,63 @@ export const ContactCard = styled.a`
 `;
 
 export const ContactName = styled.p`
-  color: white;
+  position: relative;
+  font-family: 'Arial';
+  color: var(--color-main-one);
   font-size: 1.2em;
   font-weight: 500;
+  :after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0%;
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 20%);
+  }
 `;
 
 export const ContactPhone = styled.p`
-  color: white;
+  font-family: 'Arial';
+  color: var(--color-main-one);
   font-size: 1.2em;
   font-weight: 500;
   text-align: right;
   margin-left: auto;
 `;
-export const RiDeleteBinLineSvg = styled(RiDeleteBinLine)`
+export const RiDeleteBinLineSvg = styled(RxCrossCircled)`
   position: absolute;
+  color: white;
   right: 0.2em;
   top: 0.2em;
-  color: var(--color-main-three);
-  background-color: white;
+  background-color: inherit;
   border-radius: 50%;
-  border: 3px solid white;
-  width: 14px;
-  height: 14px;
+  border: 3px solid inherit;
+  width: 20px;
+  height: 20px;
+  transition: color 250ms var(--timing-function);
+
+  :hover {
+    color: red;
+  }
 `;
 
 export const ContactUl = styled.ul`
   width: 100%;
+`;
+export const ContactWrapper = styled.div`
+  width: 100%;
+  padding: 10px;
+`;
+
+export const SvgWrapper = styled.div``;
+
+export const BsFillTelephoneFillSvg = styled(AiOutlinePhone)`
+  fill: white;
+  background-color: #42e8e0;
+  padding: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 `;

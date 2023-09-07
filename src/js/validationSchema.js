@@ -7,12 +7,12 @@ const validationSchema = Yup.object({
       "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
     )
     .required('Name is required'),
-  phone: Yup.string()
+  number: Yup.string()
     .matches(
       /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
-      'Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +'
+      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
     )
-    .required('Phone phone is required'),
+    .required('Phone number is required'),
 });
 
 export default validationSchema;

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FilterLabel, FilterInput, RiUserSearchLineSvg } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { getStatusFilter } from 'redux/selectors';
+import { setFilter } from 'redux/contacts/filterSlice';
+import { getStatusFilter } from 'redux/contacts/selectors';
 
 const Filter = () => {
   const dispatch = useDispatch();

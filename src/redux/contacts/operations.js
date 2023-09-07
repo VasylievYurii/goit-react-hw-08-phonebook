@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import Notiflix from 'notiflix';
 
-axios.defaults.baseURL = 'https://64e9acdfbf99bdcc8e66e154.mockapi.io/contacts';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchAll',
@@ -18,6 +19,18 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (data, thunkAPI) => {
+    console.log('data:', data);
+    const state = thunkAPI.getState();
+    const isFoundPhone = !state.contacts.items.find(contact =>
+      contact.number.includes(data.number)
+    );
+    if (!isFoundPhone) {
+      Notiflix.Notify.failure(`This contact is already in your contact list.`);
+      return thunkAPI.rejectWithValue(
+        'This contact is already in your contact list.'
+      );
+    }
+
     try {
       const response = await axios.post('/contacts', data);
       return response.data;

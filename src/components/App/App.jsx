@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { AnimatePresence } from 'framer-motion';
 import { useAuth } from 'hooks/useAuth';
 import { refreshUser } from 'redux/auth/operations';
 import Loader from 'components/Loader/Loader';
@@ -23,50 +22,43 @@ function App() {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return (
-    <AnimatePresence>
-      {isRefreshing ? (
-        <b>Refreshing user...</b>
-      ) : (
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route
-              path="contacts"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <PrivateRoute redirectTo="/login" component={<Contacts />} />
-                </Suspense>
-              }
-            />
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route
+          path="/contacts"
+          element={
+            <Suspense fallback={<Loader />}>
+              <PrivateRoute redirectTo="/login" component={<Contacts />} />
+            </Suspense>
+          }
+        />
 
-            <Route
-              path="registration"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <RestrictedRoute
-                    redirectTo="/contacts"
-                    component={<Registration />}
-                  />
-                </Suspense>
-              }
-            ></Route>
+        <Route
+          path="/registration"
+          element={
+            <Suspense fallback={<Loader />}>
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<Registration />}
+              />
+            </Suspense>
+          }
+        ></Route>
 
-            <Route
-              path="login"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <RestrictedRoute
-                    redirectTo="/contacts"
-                    component={<Login />}
-                  />
-                </Suspense>
-              }
-            />
-          </Route>
-        </Routes>
-      )}
-    </AnimatePresence>
+        <Route
+          path="/login"
+          element={
+            <Suspense fallback={<Loader />}>
+              <RestrictedRoute redirectTo="/contacts" component={<Login />} />
+            </Suspense>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 

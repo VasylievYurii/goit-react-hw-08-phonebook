@@ -12,7 +12,6 @@ import FormPhonebook from 'components/FormPhonebook';
 import Contact from 'components/ContactCard/ContactCard';
 import Filter from 'components/Filter';
 import Modal from 'components/Modal/Modal';
-import { motion } from 'framer-motion';
 import Loader from 'components/Loader/Loader';
 import EmptyData from 'components/EmptyData/EmptyData';
 
@@ -32,39 +31,33 @@ function Contacts() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Section>
-        <Container>
-          {isLoading && !error && <Loader />}
-          {contacts.length === 0 ? (
-            <EmptyData onClick={toggleModal}>
+    <Section>
+      <Container>
+        {isLoading && !error && <Loader />}
+        {contacts.length === 0 ? (
+          <EmptyData onClick={toggleModal}>
+            {showModal && (
+              <Modal onClick={toggleModal}>
+                <FormPhonebook onClick={toggleModal} />
+              </Modal>
+            )}
+          </EmptyData>
+        ) : (
+          <>
+            <Filter />
+            <Contact />
+            <SvgWrapper onClick={toggleModal}>
               {showModal && (
                 <Modal onClick={toggleModal}>
                   <FormPhonebook onClick={toggleModal} />
                 </Modal>
               )}
-            </EmptyData>
-          ) : (
-            <>
-              <Filter />
-              <Contact />
-              <SvgWrapper onClick={toggleModal}>
-                {showModal && (
-                  <Modal onClick={toggleModal}>
-                    <FormPhonebook onClick={toggleModal} />
-                  </Modal>
-                )}
-                <BsPersonAddSvg />
-              </SvgWrapper>
-            </>
-          )}
-        </Container>
-      </Section>
-    </motion.div>
+              <BsPersonAddSvg />
+            </SvgWrapper>
+          </>
+        )}
+      </Container>
+    </Section>
   );
 }
 
